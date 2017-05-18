@@ -28,7 +28,7 @@ export default class RequestHelper {
       promise = new Promise((resolve, reject) => {
         callback = (err, response, body) => {
           if (err) {
-            reject(err);
+            reject(err, response, body);
           } else {
             resolve({response, body});
           }
@@ -48,7 +48,7 @@ export default class RequestHelper {
     let requestOptions = this.requestBuilder(options);
     request(requestOptions, (err, response, body) => {
       if ( err ) {
-        callback(err);
+        callback(err, response, body);
       } else if ( !err && !this.isSuccessfulRequest(response.statusCode) ) {
         callback(body);
       } else {
@@ -83,7 +83,7 @@ export default class RequestHelper {
 
     this.submitRequest(options, (err, response, body) => {
       if ( err ) {
-        callback(err);
+        callback(err, response, body);
       }
       total = body.meta.total;
       items = items.concat(body[key]);
@@ -93,7 +93,7 @@ export default class RequestHelper {
       } else {
         this.getRemainingPages(options, 2, required, function (err, response, body) {
           if ( err ) {
-            callback(err);
+            callback(err, response, body);
           }
           completed++;
           items = items.concat(body[key]);
