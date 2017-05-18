@@ -48,7 +48,9 @@ export default class RequestHelper {
     let requestOptions = this.requestBuilder(options);
     request(requestOptions, (err, response, body) => {
       if ( err ) {
-        callback(err, response, body);
+	err.response = response;
+	err.body = body;
+        callback(err);
       } else if ( !err && !this.isSuccessfulRequest(response.statusCode) ) {
         callback(body);
       } else {
