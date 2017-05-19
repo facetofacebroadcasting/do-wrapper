@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/matt-major/do-wrapper.git"
   },
-  "main": "./src/do-wrapper.js",
+  "main": "./dist/do-wrapper.js",
   "types": "./types/do-wrapper.d.ts",
   "scripts": {
     "build": "gulp compile && npm run doc",

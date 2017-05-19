@@ -1,5 +1,4 @@
 'use strict';
-
 import request from 'request';
 
 export default class RequestHelper {
