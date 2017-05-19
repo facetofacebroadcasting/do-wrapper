@@ -28,11 +28,7 @@ export default class RequestHelper {
       promise = new Promise((resolve, reject) => {
         callback = (err, response, body) => {
           if (err) {
-            let fullerr = {};
-            fullerr.response = response;
-            fullerr.body = body;
-            fullerr.err = err;
-            reject(fullerr);
+            reject(err);
           } else {
             resolve({response, body});
           }
@@ -53,8 +49,6 @@ export default class RequestHelper {
     request(requestOptions, (err, response, body) => {
       if ( err ) {
         callback(err, response, body);
-      } else if ( !err && !this.isSuccessfulRequest(response.statusCode) ) {
-        callback(body);
       } else {
         callback(null, response, body);
       }
