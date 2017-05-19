@@ -48,7 +48,7 @@ export default class RequestHelper {
     let requestOptions = this.requestBuilder(options);
     request(requestOptions, (err, response, body) => {
       if ( err ) {
-        callback(err, response, body);
+        callback(err);
       } else {
         callback(null, response, body);
       }
@@ -81,7 +81,7 @@ export default class RequestHelper {
 
     this.submitRequest(options, (err, response, body) => {
       if ( err ) {
-        callback(err, response, body);
+        callback(err);
       }
       total = body.meta.total;
       items = items.concat(body[key]);
@@ -91,7 +91,7 @@ export default class RequestHelper {
       } else {
         this.getRemainingPages(options, 2, required, function (err, response, body) {
           if ( err ) {
-            callback(err, response, body);
+            callback(err);
           }
           completed++;
           items = items.concat(body[key]);
